@@ -27,5 +27,6 @@ const categorySchema = new mongoose.Schema({
 
 categorySchema.index({ userId: 1, name: 1 }, { unique: true });
 categorySchema.index({ name: 'text', description: 'text' });
+categorySchema.index({ name: 'text' });
 
 module.exports = mongoose.model('Category', categorySchema);

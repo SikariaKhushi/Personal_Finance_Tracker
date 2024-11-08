@@ -144,11 +144,15 @@ exports.getMonthlyReport = async (req, res) => {
   };
   
 
-  exports.searchTransactions = async (req, res) => {
+// Transaction search function
+exports.searchTransactions = async (req, res) => {
     try {
       const { searchTerm = '' } = req.query;
       const results = await Transaction.find(
-        { $text: { $search: searchTerm }, userId: req.user.id },
+        { 
+          $text: { $search: searchTerm }, 
+          userId: req.user.id 
+        },
         { score: { $meta: 'textScore' } }
       ).sort({ score: { $meta: 'textScore' } });
       res.json(results);
@@ -156,12 +160,16 @@ exports.getMonthlyReport = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
-
+  
+  // Category search function
   exports.searchCategories = async (req, res) => {
     try {
       const { searchTerm = '' } = req.query;
       const results = await Category.find(
-        { $text: { $search: searchTerm }, userId: req.user.id },
+        { 
+          $text: { $search: searchTerm }, 
+          userId: req.user.id 
+        },
         { score: { $meta: 'textScore' } }
       ).sort({ score: { $meta: 'textScore' } });
       res.json(results);
@@ -169,3 +177,4 @@ exports.getMonthlyReport = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
+  

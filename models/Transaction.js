@@ -51,5 +51,6 @@ transactionSchema.index({ date: -1 });
 transactionSchema.index({ description: 'text' });
 transactionSchema.index({ tags: 1 });
 transactionSchema.index({ location: '2dsphere' });
+transactionSchema.index({ description: 'text' });
 
 module.exports = mongoose.model('Transaction', transactionSchema);
